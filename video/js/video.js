@@ -1,45 +1,49 @@
 'use strict';
 
-var video=document.getElementById('video');
-var button=document.getElementById('button');
-var pB=document.getElementById('progressBar');
+var player={};
 
-video.load();
-button.classList.add('loading');
+player.video=document.getElementById('video');
+player.button=document.getElementById('button');
+player.pB=document.getElementById('progressBar');
 
-video.addEventListener('canplaythrough',playPause,false);
-window.addEventListener('click',playPause,false);
-video.addEventListener('timeupdate',playProgress,false);
-pB.addEventListener('click',setVideoTime,false);
+player.video.load();
+player.button.classList.add('loading');
 
-function playPause(e){
+
+
+player.playPause = function(e){
 	if(e.type=='canplaythrough'){
-		video.removeEventListener('canplaythrough',playPause,false);
+		player.video.removeEventListener('canplaythrough',player.playPause,false);
 	}
-	console.log(e); 
-	button.classList.remove('loading');
-	if(video.paused){
-		video.play();
-		button.classList.add('off');
+	player.button.classList.remove('loading');
+	if(player.video.paused){
+		player.video.play();
+		player.button.classList.add('off');
 	}
 	else{
-		video.pause();
-		button.classList.remove('off');
+		player.video.pause();
+		player.button.classList.remove('off');
 	}
 }
 
-function playProgress(){
+player.playProgress = function (){
 	var self=this;
 	var progress=self.currentTime*100/self.duration;
 	document.querySelector('.progress').style.width=progress+'%';
 }
 
-function setVideoTime(e){
+player.setVideoTime = function (e){
 	e.stopPropagation();
-	console.log(e); 
-	video.currentTime=e.offsetX*video.duration/this.offsetWidth;
+	player.video.currentTime=e.offsetX*player.video.duration/this.offsetWidth;
 }
 
+
+player.video.addEventListener('canplaythrough',player.playPause,false);
+window.addEventListener('click',player.playPause,false);
+player.video.addEventListener('timeupdate',player.playProgress,false);
+player.pB.addEventListener('click',player.setVideoTime,false);
+
+console.log(player); 
 
 
 
