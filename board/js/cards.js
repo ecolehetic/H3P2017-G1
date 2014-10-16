@@ -15,7 +15,9 @@ function getCard (e) {
 	card.date=cardDate;
 	model.add(card,function(){
 		console.log('item recorded');
-		UI.render(card);
+		UI.render(card,function(deleteButton){
+			deleteButton.addEventListener('click',deleteCard,false);
+		});
 	});
 }
 
