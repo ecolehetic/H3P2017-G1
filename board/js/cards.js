@@ -1,7 +1,7 @@
 "use strict";
 
 
-var card={},mapCanvas;
+var card={};
 
 var addCard=document.getElementById('addCard');
 addCard.addEventListener('submit',getCard,false);
@@ -46,8 +46,7 @@ function addLocation(e){
 	e.preventDefault();
 	UI.toggleLoader();
 	model.getUserLocation(function(userPos){
-		UI.drawMap(userPos,function(map){
-			mapCanvas=map;
+		UI.drawMap(userPos,function(){
 			UI.toggleMap().toggleLoader();
 		});
 	});
@@ -57,14 +56,11 @@ function geoCoder(e){
 	e.preventDefault();
 	var address=document.querySelector("input[name='address']").value;
 	if(!address){return;}
-	var geocoder = new google.maps.Geocoder();
-	geocoder.geocode({"address":address},function(data,status){
-		if(status=='OK'){
-			var latLng=data[0].geometry.location;
-			new google.maps.Marker({position:latLng,map:mapCanvas});
-			mapCanvas.panTo(latLng);
-		} 
+	model.geocode(address,function(latLng){
+		UI.setMarker(latLng).setCenter(latLng);
 	});
+	
+		
 }
 
 

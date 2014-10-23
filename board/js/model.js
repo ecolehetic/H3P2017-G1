@@ -66,8 +66,15 @@ var model={
 		);
 	},
 	
-	
-		
+	geocode : function(address,callback){
+		var geocoder = new google.maps.Geocoder();
+		geocoder.geocode({"address":address},function(data,status){
+			if(status=='OK'){
+				var latLng=data[0].geometry.location;
+				callback.call(this,latLng);
+			} 
+		});
+	}
 }
 
 
