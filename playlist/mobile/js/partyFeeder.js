@@ -4,7 +4,9 @@ var feeder={
 	
 	init : function(){
 		model.getCollection(function(tracks){
-			//console.log(tracks); 
+			UI.render(tracks,function(){
+				console.log('li créée'); 
+			});
 		});
 	},
 	

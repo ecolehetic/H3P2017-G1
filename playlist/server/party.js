@@ -9,8 +9,10 @@ var party={
 	listen : function(socket){ 
 		// écoute un event getCollection
 			socket.on('getCollection',function(){
-				//émet un event collection en passant un msg.
-				socket.emit('collection','Hello World!');
+				// récupère le json
+				var collection = require('./collection.json');
+				//émet un event collection en passant le json.
+				socket.emit('collection',collection);
 			});
 	}
 	
