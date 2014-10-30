@@ -4,8 +4,10 @@ var feeder={
 	
 	init : function(){
 		model.getCollection(function(tracks){
-			UI.render(tracks,function(){
-				console.log('li créée'); 
+			UI.render(tracks,function(li){
+				li.addEventListener('touchstart', feeder.start, false);
+				li.addEventListener('touchmove', feeder.move, false);
+				li.addEventListener('touchend', feeder.end, false);
 			});
 		});
 	},
@@ -23,7 +25,7 @@ var feeder={
 		if(offset<200){
 			UI.resetPos(this)
 		}
-		if(offset>200){
+		else{
 			UI.addTrack(this);
 			var track={};
 			track.src=this.getAttribute('data-tracksrc');

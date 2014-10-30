@@ -12,7 +12,26 @@ var model={
 			// on renvoie les tracks au controller.
 			callback.call(this,tracks);
 		});	
+	},
+	
+	addTrack : function(track,callback){
+		this.socket.emit('add',track);
+		this.socket.on('added',function(){
+			callback.call(this);
+		});
 	}
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
