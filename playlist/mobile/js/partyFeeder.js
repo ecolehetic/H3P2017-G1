@@ -2,6 +2,11 @@
 
 var feeder={
 	
+	init : function(){
+		model.getCollection(function(tracks){
+			//console.log(tracks); 
+		});
+	},
 	
 	move : function(e){
 		e.preventDefault();
@@ -27,10 +32,9 @@ var feeder={
 		}
 	},
 	
-	
 	start : function(e){
 		feeder.start=e.touches[0].pageX;
-	},
+	}
 		
 
 }
