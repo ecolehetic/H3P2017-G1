@@ -19,8 +19,7 @@ var party={
 			
 			socket.on('add',function(datas){
 				party.playlist.push(datas);
-				console.log(party.playlist); 
-				socket.emit('added');
+				party.io.emit('added',datas);
 			});
 			
 			socket.on('getPlaylist',function(){

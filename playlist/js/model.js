@@ -8,7 +8,25 @@ var model={
 		this.io.on('playlist',function(tracks){
 			callback.call(this,tracks);
 		});
+	},
+	
+	listen : function(callback){
+		this.io.on('added',function(track){
+			callback.call(this,track);
+		});
 	}
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
