@@ -23,6 +23,10 @@ var party={
 				socket.emit('added');
 			});
 			
+			socket.on('getPlaylist',function(){
+				socket.emit('playlist',party.playlist);
+			});
+			
 	}
 	
 };
